@@ -15,8 +15,8 @@
   <div id="videos"></div>
 
   <script>
-    const API_KEY = AIzaSyASIJ_QoHwAMKHWzgiWI1U5yXzVhNje7bA;
-    const CHANNEL_ID = UCQyt4GMejh3cE1JtHBwaBCg;
+    const API_KEY = "AIzaSyASIJ_QoHwAMKHWzgiWI1U5yXzVhNje7bA";
+    const CHANNEL_ID = "UCQyt4GMejh3cE1JtHBwaBCg";
 
     fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet&type=video&maxResults=10&order=date`)
       .then(r => r.json())
