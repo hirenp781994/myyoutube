@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My YouTube Channel</title>
+  <style>
+    body { font-family: Arial; background: #f9f9f9; padding: 20px; }
+    h1 { color: red; }
+    .video { background: white; margin: 15px 0; padding: 15px; border-radius: 8px; display: flex; gap: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    img { width: 200px; border-radius: 5px; }
+    a { text-decoration: none; color: #333; font-size: 16px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>🎬 My YouTube Channel</h1>
+  <div id="videos"></div>
+
+  <script>
+    const API_KEY = "AIzaSyASIJ_QoHwAMKHWzgiWI1U5yXzVhNje7bA";
+    const CHANNEL_ID = "UCQyt4GMejh3cE1JtHBwaBCg";
+
+    fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet&type=video&maxResults=10&order=date`)
+      .then(r => r.json())
+      .then(data => {
+        const container = document.getElementById("videos");
+        data.items.forEach(item => {
+          const vid = item.id.videoId;
+          const title = item.snippet.title;
+          const thumb = item.snippet.thumbnails.medium.url;
+          container.innerHTML += `
+            <div class="video">
+              <img src="${thumb}" />
+              <div>
+                <a href="https://www.youtube.com/watch?v=${vid}" target="_blank">${title}</a>
+                <p>${item.snippet.description.substring(0,100)}...</p>
+              </div>
+            </div>`;
+        });
+      });
+  </script>
+</body>
+</html>
